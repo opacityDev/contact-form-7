@@ -28,13 +28,13 @@ then
     curl -o wordpress.tar.gz -fL "https://wordpress.org/wordpress-$version.tar.gz"
     tar -xzf wordpress.tar.gz -C .
     mv wordpress html
-    cp .githooks/wp-config-docker.php html/wp-config-docker.php
+    python3 .githooks/custom_wp_config.py $repo_name\.com
+    cp wp-config-docker.php html/wp-config-docker.php
 	rm wordpress.tar.gz
     
 fi
 
-cp .githooks/Dockerfile Dockerfile
-cp .githooks/wp-config-docker.php wp-config-docker.php
+cp .githooks/Dockerfile Dockerfile 
 cp .githooks/docker-entrypoint.sh docker-entrypoint.sh
 
 docker build -t $repo_name:$current_branch .
@@ -42,7 +42,10 @@ docker run -d -e WORDPRESS_DB_HOST=$mysql_cip -e WORDPRESS_DB_USER=root -e WORDP
 
 wp_cid=$(docker ps -q --filter="name=wp_$repo_name\_$current_branch")
 wp_cip=$(docker inspect $wp_cid -f '{{.NetworkSettings.IPAddress}}')
+sudo python3 .githooks/update_hosts.py $wp_cip $repo_name\.com
+
 echo "- Wordpress container for branch $current_branch ID/IP => $wp_cid/$wp_cip"
+  
 
 rm *.php
 rm *.sh

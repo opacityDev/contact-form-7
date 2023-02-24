@@ -120,6 +120,7 @@ RUN set -eux; \
 # (replace all instances of "%h" with "%a" in LogFormat)
 	find /etc/apache2 -type f -name '*.conf' -exec sed -ri 's/([[:space:]]*LogFormat[[:space:]]+"[^"]*)%h([^"]*")/\1%a\2/g' '{}' +
 
+RUN echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf 
 
 COPY html /usr/src/wordpress
 RUN \

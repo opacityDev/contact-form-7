@@ -9,10 +9,10 @@ if __name__=="__main__":
                                             password=sys.argv[4]) 
         if connection.is_connected():
             db_Info = connection.get_server_info()
-            print("Connected to MySQL Server version ", db_Info)
+            print("Connected to MySQL Server version '"+ db_Info + "'")
             cursor = connection.cursor()
-            cursor.execute("drop database if exists "+ sys.argv[2])
-            cursor.execute("create database "+sys.argv[2])
+            cursor.execute("drop database if exists `"+ sys.argv[2] +"`")
+            cursor.execute("create database `"+sys.argv[2]+"`")
             print("Mysql database for this branch has been reset successfully")
     except Error as e:
         print("Error while connecting to MySQL", e)

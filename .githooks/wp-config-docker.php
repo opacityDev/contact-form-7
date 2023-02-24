@@ -107,7 +107,10 @@ $table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', !!getenv_docker('WORDPRESS_DEBUG', '') );
+
+ define( 'WP_DEBUG', !!getenv_docker('WORDPRESS_DEBUG', '') );
+define('WP_HOME','http://URL_TO_BE_CHANGED_WP_DOCKER');
+define('WP_SITEURL','http://URL_TO_BE_CHANGED_WP_DOCKER');
 
 /* Add any custom values between this line and the "stop editing" line. */
 
