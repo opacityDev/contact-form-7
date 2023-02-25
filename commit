@@ -24,4 +24,4 @@ rm dump.sql
 
 docker cp $wp_cid:/var/www/html/ .
 git add .
-git commit -m $1
+git commit -m "$1"
