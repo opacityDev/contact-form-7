@@ -47,6 +47,6 @@ sudo python3 .githooks/update_hosts.py $wp_cip $repo_name\.com
 echo "- Wordpress container for branch $current_branch ID/IP => $wp_cid/$wp_cip"
   
 
-rm *.php
+rm *.php 2> /dev/null
 rm *.sh
 rm Dockerfile
